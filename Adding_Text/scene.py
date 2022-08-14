@@ -1,7 +1,5 @@
 
-
 from manim import *
-
 class Node(VGroup):
     CONFIG={
         "radius":0.5,
@@ -44,7 +42,9 @@ class NArrow(Arrow):
 class HelloWorld(Scene):
     def construct(self):
         title = Text("Find Duplicate Number", font_size=30)
-        subtitle = Text("Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive. \n There is only one repeated number in nums, return this repeated number. \n You must solve the problem without modifying the array nums and uses only constant extra space. ", font_size=20)
+        subtitle = Text("Given an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive. \
+            \n There is only one repeated number in the array, return this repeated number. \
+            \n You must solve the problem without modifying the array and using only constant extra space. ", font_size=21)
         self.play(Write(title))
         self.play(FadeOut(title))
 
@@ -73,11 +73,11 @@ class HelloWorld(Scene):
         edges.append(CurvedArrow(edges[3].get_end(), edges[3].get_start()))
         
         for i in range(n):
-            self.play(Create(nodes[i]))
+            self.play(Create(nodes[i]), run_time = 0.2)
 
         for i in range(n+1):
             if i!=3:
-             self.play(Create(edges[i]))
+             self.play(Create(edges[i]), run_time = 0.2)
 
         for i in range(n):
             self.play(FadeOut(nodes[i]), run_time=0.1)
@@ -86,8 +86,6 @@ class HelloWorld(Scene):
             if i!=3:
              self.play(FadeOut(edges[i]), run_time=0.1)
 
-
-        
         example2 = Table([['3','4','1','5','2', '4'],], include_outer_lines=True)
         self.play(Create(example2))
 
@@ -99,4 +97,23 @@ class HelloWorld(Scene):
 
         self.play(FadeOut(example2))
         self.play(FadeOut(indices2))
-       
+
+        
+        coord_nodes2 = [[-5,0,0], [5,0,0],[3,0,0], [-3,0,0], [1,0,0], [-1,0,0]]
+
+        num = len(coord_nodes2)
+        nodes2 = [Node(str(i), coord_nodes2[i]) for i in range(num)]
+        
+        for i in range(num):
+            self.play(Create(nodes2[i]), run_time = 0.2)
+
+        relations = {nodes2[0]: nodes2[3], nodes2[3]: nodes2[5], nodes2[5]: nodes2[4], nodes2[4]: nodes2[2], nodes2[2]: nodes2[1]}
+
+        edges2 =[NArrow(key, value) for key, value in relations.items()]
+        value = len(edges2)
+        for i in range(value):
+             self.play(Create(edges2[i]), run_time=0.2)
+
+        last_edge = NArrow(nodes2[1], nodes2[4])
+        last_edge = CurvedArrow(last_edge.get_start(), last_edge.get_end())
+        self.play(Create(last_edge))

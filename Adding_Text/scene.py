@@ -1,3 +1,5 @@
+#TODO add sound and sync with video
+from cmath import pi
 
 from manim import *
 class Node(VGroup):
@@ -73,11 +75,11 @@ class HelloWorld(Scene):
         edges.append(CurvedArrow(edges[3].get_end(), edges[3].get_start()))
         
         for i in range(n):
-            self.play(Create(nodes[i]), run_time = 0.2)
+            self.play(Create(nodes[i]), run_time = 0.5)
 
         for i in range(n+1):
             if i!=3:
-             self.play(Create(edges[i]), run_time = 0.2)
+             self.play(Create(edges[i]), run_time = 0.5)
 
         for i in range(n):
             self.play(FadeOut(nodes[i]), run_time=0.1)
@@ -117,3 +119,58 @@ class HelloWorld(Scene):
         last_edge = NArrow(nodes2[1], nodes2[4])
         last_edge = CurvedArrow(last_edge.get_start(), last_edge.get_end())
         self.play(Create(last_edge))
+
+        starts = [[-5,0,0], [-3,0,0], [-1,0,0], [1,0,0], [3,0,0], [5,0,0]]
+        ends = [[-5,3,0], [-3,3,0], [-1,3,0], [1,3,0], [3,3,0], [5,3,0]]
+        n = len(starts)
+        for i in range(n):
+            arrow = Arrow(starts[i], ends[i])
+            arrow.height = 1
+            arrow.rotate(pi)
+            data  = arrow.get_coord(2)
+            label = Text(str(i+1)).set_coord(data, 2)
+            self.play(Create(arrow), run_time = 0.2)
+            label.next_to(arrow, UP)
+            self.play(Create(label), run_time = 0.2)
+            self.play(FadeOut(arrow), run_time = 0.2)
+            self.play(FadeOut(label), run_time = 0.2)
+
+        cycle_starts = [[3,0,0], [5,0,0],[1,0,0], [3,0,0]]            
+        cycle_ends = [[3,3,0], [5,3,0], [1,3,0], [3,3,0]]
+        for i in range(3):
+            arrow = Arrow(cycle_starts[i], cycle_ends[i])
+            arrow.height = 1
+            arrow.rotate(pi)
+            data  = arrow.get_coord(2)
+            label = Text(str(i+1)).set_coord(data, 2)
+            self.play(Create(arrow), run_time = 0.2)
+            label.next_to(arrow, UP)
+            self.play(Create(label), run_time = 0.2)
+            self.play(FadeOut(arrow), run_time = 0.2)
+            self.play(FadeOut(label), run_time = 0.2)
+        
+        starts = [[-5,0,0], [-3,0,0], [-1,0,0], [1,0,0]]
+        ends = [[-5,4,0], [-3,4,0], [-1,4,0], [1,4,0]]
+        starts1 = [[1,0,0], [3,0,0], [5,0,0], [1,0,0]]
+        ends1 = [[1,4,0], [3,4,0], [5,4,0], [1,0,0]]
+        n = len(starts)
+        for i in range(n):
+            arrow = Arrow(starts[i], ends[i])
+            arrow1 = Arrow(starts1[i], ends1[i])
+            arrow.height = 1
+            arrow1.height = 1
+            arrow.rotate(pi)
+            arrow1.rotate(pi)
+            data  = arrow.get_coord(2)
+            data1 = arrow1.get_coord(2)
+            label1 = Text('F').set_coord(data1, 2)
+            label = Text('S').set_coord(data, 2)
+            self.play(Create(arrow), Create(arrow1))
+            label.next_to(arrow, UP)
+            label1.next_to(arrow1, UP)
+            self.play(Create(label), Create(label1))
+            self.play(FadeOut(arrow), FadeOut(arrow1))
+            self.play(FadeOut(label), FadeOut(label1))
+                
+        
+            

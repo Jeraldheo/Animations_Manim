@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/3163782288_3453404529_223132457.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_1697240669_762399058.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_2414663958_223132457.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_338364047_1029122307.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_3399155982_223132457.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_4258721055_1029122307.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_1591063432_223132457.mp4'
+file 'file:C:/Users/DELL/Desktop/Animations_Manim/two_moving_arrows/media/videos/two_moving_arrows/480p15/partial_movie_files/MovingArrows/2201830969_3501693831_2503378398.mp4'

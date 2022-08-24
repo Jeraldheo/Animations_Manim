@@ -44,23 +44,31 @@ class NArrow(Arrow):
 class HelloWorld(Scene):
     def construct(self):
         title = Text("Find Duplicate Number", font_size=30)
+        
+        self.add_sound('animation_audio.wav')
+
         subtitle = Text("Given an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive. \
             \n There is only one repeated number in the array, return this repeated number. \
             \n You must solve the problem without modifying the array and using only constant extra space. ", font_size=21)
-        self.play(Write(title))
+
+        self.play(Create(title))
+        self.wait(duration=8)
         self.play(FadeOut(title))
 
         self.play(Write(subtitle)) 
+        self.wait(duration=21)
         self.play(FadeOut(subtitle))
 
         example1 = Table([['1','3','4','2','2'],], include_outer_lines=True)
         self.play(Create(example1))
-
+        
         indices = [Text(str(i)) for i in range(5)]
 
         indices = VGroup(indices[0], indices[1], indices[2], indices[3], indices[4]).arrange(5*RIGHT)
         indices.next_to(example1, DOWN, buff=0.5)
         self.play(Create(indices))
+
+        self.wait(duration=25)
 
         self.play(FadeOut(example1))
         self.play(FadeOut(indices))
@@ -68,7 +76,15 @@ class HelloWorld(Scene):
         
         coord_nodes = [[-3,3,0], [0,2,0],[2,0,0], [1,-3,0], [-2,-2,0]]
         n = len(coord_nodes)
-        nodes = [Node(str(i), coord_nodes[i]) for i in range(n)]
+        nodes = []
+        for i in range(n):
+            label = i
+            if i==2:
+                label = 3
+            if i == 3:
+                label = 2
+            nodes.append(Node(str(label), coord_nodes[i]))
+                
 
         edges =[NArrow(nodes[i], nodes[i+1]) for i in range(n-1)]
         edges.append(CurvedArrow(edges[3].get_start(), edges[3].get_end()))
@@ -81,12 +97,16 @@ class HelloWorld(Scene):
             if i!=3:
              self.play(Create(edges[i]), run_time = 0.5)
 
+        self.wait(duration=30)
+
         for i in range(n):
             self.play(FadeOut(nodes[i]), run_time=0.1)
 
         for i in range(n+1):
             if i!=3:
              self.play(FadeOut(edges[i]), run_time=0.1)
+        
+        
 
         example2 = Table([['3','4','1','5','2', '4'],], include_outer_lines=True)
         self.play(Create(example2))
@@ -97,6 +117,7 @@ class HelloWorld(Scene):
         indices2.next_to(example2, DOWN, buff=0.5)
         self.play(Create(indices2))
 
+        self.wait(duration=15)
         self.play(FadeOut(example2))
         self.play(FadeOut(indices2))
 
@@ -119,6 +140,7 @@ class HelloWorld(Scene):
         last_edge = NArrow(nodes2[1], nodes2[4])
         last_edge = CurvedArrow(last_edge.get_start(), last_edge.get_end())
         self.play(Create(last_edge))
+        self.wait(duration=55)
 
         starts = [[-5,0,0], [-3,0,0], [-1,0,0], [1,0,0], [3,0,0], [5,0,0]]
         ends = [[-5,3,0], [-3,3,0], [-1,3,0], [1,3,0], [3,3,0], [5,3,0]]
@@ -134,6 +156,8 @@ class HelloWorld(Scene):
             self.play(Create(label), run_time = 0.2)
             self.play(FadeOut(arrow), run_time = 0.2)
             self.play(FadeOut(label), run_time = 0.2)
+        
+        self.wait(duration=10)
 
         cycle_starts = [[3,0,0], [5,0,0],[1,0,0], [3,0,0]]            
         cycle_ends = [[3,3,0], [5,3,0], [1,3,0], [3,3,0]]
@@ -148,11 +172,11 @@ class HelloWorld(Scene):
             self.play(Create(label), run_time = 0.2)
             self.play(FadeOut(arrow), run_time = 0.2)
             self.play(FadeOut(label), run_time = 0.2)
-        
+        self.wait(duration=5)
         starts = [[-5,0,0], [-3,0,0], [-1,0,0], [1,0,0]]
         ends = [[-5,4,0], [-3,4,0], [-1,4,0], [1,4,0]]
-        starts1 = [[1,0,0], [3,0,0], [5,0,0], [1,0,0]]
-        ends1 = [[1,4,0], [3,4,0], [5,4,0], [1,0,0]]
+        starts1 = [[1,-1,0], [3,-1,0], [5,-1,0], [1,-1,0]]
+        ends1 = [[1,-4,0], [3,-4,0], [5,-4,0], [1,-4,0]]
         n = len(starts)
         for i in range(n):
             arrow = Arrow(starts[i], ends[i])
@@ -163,14 +187,15 @@ class HelloWorld(Scene):
             arrow1.rotate(pi)
             data  = arrow.get_coord(2)
             data1 = arrow1.get_coord(2)
-            label1 = Text('F').set_coord(data1, 2)
-            label = Text('S').set_coord(data, 2)
+            label1 = Text('S').set_coord(data1, 2)
+            label = Text('F').set_coord(data, 2)
             self.play(Create(arrow), Create(arrow1))
             label.next_to(arrow, UP)
             label1.next_to(arrow1, UP)
             self.play(Create(label), Create(label1))
-            self.play(FadeOut(arrow), FadeOut(arrow1))
-            self.play(FadeOut(label), FadeOut(label1))
+            if i!=n-1:
+                self.play(FadeOut(arrow), FadeOut(arrow1))
+                self.play(FadeOut(label), FadeOut(label1))
                 
         
             
